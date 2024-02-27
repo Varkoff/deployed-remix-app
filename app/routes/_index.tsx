@@ -14,8 +14,15 @@ export const loader = async () => {
 
 export default function Index() {
 	const { date, APP_ENV } = useLoaderData<typeof loader>();
+	const isProduction = APP_ENV === 'production';
 	return (
-		<div style={{ fontFamily: 'system-ui, sans-serif', lineHeight: '1.8' }}>
+		<div
+			style={{
+				fontFamily: 'system-ui, sans-serif',
+				lineHeight: '1.8',
+				backgroundColor: isProduction ? 'pink' : 'yellow',
+			}}
+		>
 			<img src='https://picsum.photos/200' alt='' />
 			<p>{new Date(date).toLocaleString('fr-FR')}</p>
 			<p>{APP_ENV}</p>
