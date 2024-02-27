@@ -26,7 +26,6 @@ export default function Index() {
 			<img src='https://picsum.photos/200' alt='' />
 			<p>{new Date(date).toLocaleString('fr-FR')}</p>
 			<p>{APP_ENV}</p>
-			<p>{date}</p>
 		</div>
 	);
 }
