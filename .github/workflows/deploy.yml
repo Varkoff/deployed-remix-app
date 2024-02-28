@@ -70,7 +70,7 @@ jobs:
     runs-on: [self-hosted]
     needs: [lint, typecheck, build]
     # only build/deploy main branch on pushes
-    if: ${{ (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev') && github.event_name == 'push' }}
+    if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push' }}
     # env:
     #   APP_ENV: ${{ secrets.APP_ENV }}
 
@@ -83,14 +83,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: 🚀 Run Docker Compose on Staging
-        if: ${{ github.ref == 'refs/heads/dev' }}
-        env:
-          APP_ENV: ${{ secrets.APP_ENV_STAGING }}
-        run: |
-          docker pull varkoff/deployed-app:latest
-          docker compose -f docker-compose.staging.yaml up -d
-          docker system prune --all --volumes --force
 
       - name: 🚀 Run Docker Compose on Production
         if: ${{ github.ref == 'refs/heads/main' }}
