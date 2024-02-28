@@ -7,4 +7,4 @@ services:
     image: varkoff/deployed-app:production
     restart: always
     ports:
-      - '3000:3000'
+      - 3000
